@@ -1,0 +1,88 @@
+#set($h1 = '#')
+#set($h2 = '##')
+#set($h3 = '###')
+#set($h4 = '####')
+
+${ticDisplayedName} - ${ticDisplayedBW5MavenName} is the core Maven plugin
+defining the BW5 lifecycles.
+
+$h3 5-minute user guide*
+
+\* <i>download-time of Maven dependencies and 
+<a href="${siteDisplayURL}/${toeInstallerURLBase}/">TIBCO products installation</a>
+not included.</i>
+
+<span class="separator" />
+
+<ul class="fa-ul ul-main">
+<li><p>
+<span class="fa fa-hand-o-right"></span> Ensure the
+<a href="./global-documentation.html#Sample_Profile">sample profile</a> is set
+in the <a href="https://maven.apache.org/settings.html">Maven 'settings.xml'
+file</a>.
+
+${sampleProfile}
+
+</p></li>
+
+<span class="separator" />
+
+<li><p>
+<span class="fa fa-hand-o-right"></span> Create a new TIBCO BusinessWorks 5.x
+project with
+<a href="${siteDisplayURL}/${tacURLBase}/archetypes/index.html">archetypes</a>:
+
+<ul>
+<li><a href="${siteDisplayURL}/${tacURLBase}/archetypes/bw5/ear/default-bw5-ear/index.html">default BW5 EAR archetype</a>,
+a simple TIBCO BusinessWorks 5.x project with a <i>File Poller</i> which
+generates a TIBCO BusinessWorks 5.x EAR and XML.
+</li>
+
+${default-bw5-ear_ArchetypeCommandLine}
+
+</ul>
+</p></li>
+
+<span class="separator" />
+
+<li><p>
+<span class="fa fa-hand-o-right"></span> Launch the TIBCO Designer:
+
+<div class="command" title="Launch Designer">
+<span id="command">mvn bw5:designer</span>
+<span class="argument">-P tic-bw5</span>
+</div>
+
+</p></li>
+
+<span class="separator" />
+
+<li><p>
+<span class="fa fa-hand-o-right"></span> Generate the EAR and XML file
+(<i>after closing the TIBCO Designer</i>):
+
+<div class="command" title="Generate EAR and XML">
+<span id="command">mvn clean package</span>
+<span class="argument">-P tic-bw5</span>
+</div>
+
+</p></li>
+</ul>
+
+<!--
+<span class="separator" />
+
+$h3 Going further
+-->
+
+---
+
+$h2 Documentation
+
+<ul class="fa-ul">
+  <li><span class="fa-li fa fa-plug"></span> <a href="./plugin-info.html">Plugin documentation</a></li>
+  <li><span class="fa-li fa fa-gear"></span> <a href="./global-documentation.html">Global documentation</a></li>
+  <li><span class="fa-li fa fa-recycle"></span> <a href="./lifecycles.html">Lifecycles</a></li>
+  <li>Source <span class="fa-li fa fa-git"></span> <a href="./source-repository.html">repository</a> / <span class="fa-li fa fa-git"></span> <a href="./xref/index.html">reference</a></li>
+  <li><span class="fa-li fa fa-coffee"></span> <a href="./apidocs/index.html">Javadoc</a></li>
+</ul>
