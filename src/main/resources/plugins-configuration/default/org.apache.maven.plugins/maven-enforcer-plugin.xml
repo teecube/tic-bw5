@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    (C) Copyright 2014-2016 teecube
+    (http://teecu.be) and others.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<plugin>
+	<version>1.4.1</version>
+	<configuration>
+		<rules>
+			<requireMavenVersion>
+				<version>[3.1.1,)</version>
+			</requireMavenVersion>
+			<requireJavaVersion>
+				<version>[1.7.0,)</version>
+			</requireJavaVersion>
+			<requireProperty>
+				<property>tibco.home</property>
+				<message>The "tibco.home" property must be a valid TIBCO installation.${line.separator}${line.separator}Make sure you have a profile set like the following:${line.separator}${sampleProfileCommandLine}${line.separator}${line.separator}Run 'mvn toe:bw5-configure' for guided configuration.</message>
+				<regex>.*</regex>
+			</requireProperty>
+			<requireProperty>
+				<property>tibco.bw5.version</property>
+				<message>The "tibco.bw5.version" property must be set.</message>
+				<regex>5\.\d*</regex>
+				<regexMessage>The "tibco.bw5.version" property must start with '5.' but is '${tibco.bw5.version}'.</regexMessage>
+			</requireProperty>
+			<requireProperty>
+				<property>tibco.bw5.designer.version</property>
+				<message>The "tibco.bw5.designer.version" property must be set.</message>
+				<regex>5\.\d*</regex>
+				<regexMessage>The "tibco.bw5.designer.version" property must start with '5.' but is '${tibco.bw5.designer.version}'.</regexMessage>
+			</requireProperty>
+			<requireProperty>
+				<property>tibco.bw5.tra.version</property>
+				<message>The "tibco.bw5.tra.version" property must be set.</message>
+				<regex>5\.\d*</regex>
+				<regexMessage>The "tibco.bw5.tra.version" property must start with '5.' but is '${tibco.bw5.tra.version}'.</regexMessage>
+			</requireProperty>
+			<requireFilesExist>
+				<files>
+					<file>${tibco.bw5.bw.bwengine}</file>
+					<file>${tibco.bw5.designer.buildlibrary}</file>
+					<file>${tibco.bw5.designer.designer}</file>
+					<file>${tibco.bw5.tra.AppManage}</file>
+					<file>${tibco.bw5.tra.buildear}</file>
+				</files>
+			</requireFilesExist>
+
+			<requireFilesExist>
+				<files>
+					<file>${tibco.bw5.project.source}</file>
+				</files>
+				<message>The BusinessWorks project is not found.${line.separator}${line.separator}The property 'tibco.bw5.project.source' must be set to the path of the project.${line.separator}Actual value is '${tibco.bw5.project.source}'.${line.separator}</message>
+			</requireFilesExist>
+		</rules>
+		<fail>true</fail>
+		<failFast>true</failFast> <!-- Fail on the first rule that doesn't pass -->
+	</configuration>
+</plugin>
