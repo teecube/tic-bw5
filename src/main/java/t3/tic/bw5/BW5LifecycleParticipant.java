@@ -70,6 +70,10 @@ public class BW5LifecycleParticipant extends AbstractMavenLifecycleParticipant i
 	@org.apache.maven.plugins.annotations.Component
 	protected PluginDescriptor pluginDescriptor; // plugin descriptor of this plugin
 
+	public final static String pluginGroupId = "io.teecube.tic";
+	public final static String pluginArtifactId = "tic-bw5";
+	public final static String pluginKey = BW5LifecycleParticipant.pluginGroupId + ":" + BW5LifecycleParticipant.pluginArtifactId;
+
 	private CommonMojo propertiesManager;
 
 	@Override
@@ -91,7 +95,7 @@ public class BW5LifecycleParticipant extends AbstractMavenLifecycleParticipant i
 		PropertiesEnforcer.setCustomProperty(session, "sampleProfileCommandLine", GenerateGlobalParametersDocMojo.standaloneGenerator(session.getCurrentProject(), this.getClass()).getFullSampleProfileForCommandLine("tic-bw5", "| ")); // TODO: retrieve artifactId with pluginDescriptor
 
 		if (!ignoreRules(session)) {
-			PropertiesEnforcer.enforceProperties(session, pluginManager, logger, projectPackagings, BW5LifecycleParticipant.class); // check that all mandatory properties are correct
+			PropertiesEnforcer.enforceProperties(session, pluginManager, logger, projectPackagings, BW5LifecycleParticipant.class, pluginKey); // check that all mandatory properties are correct
 		}
 
 		PluginManager.registerCustomPluginManager(pluginManager, new BW5MojosFactory()); // to inject Global Parameters in Mojos
@@ -147,7 +151,7 @@ public class BW5LifecycleParticipant extends AbstractMavenLifecycleParticipant i
 				switch (mavenProject.getPackaging()) {
 				case BW5ProjectCommonMojo.PROJLIB_TYPE:
 				case BW5ProjectCommonMojo.BWEAR_TYPE:
-					PluginConfigurator.updatePluginsConfiguration(mavenProject, session, true, BW5LifecycleParticipant.class, logger);
+					PluginConfigurator.updatePluginsConfiguration(mavenProject, session, true, BW5LifecycleParticipant.class, logger, pluginKey);
 					if (session.getGoals().contains(BW5ProjectCommonMojo.DESIGNER_GOAL)) {
 						removeCompileGoal(mavenProject);
 					}
