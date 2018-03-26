@@ -1,5 +1,5 @@
 /**
- * (C) Copyright 2016-2017 teecube
+ * (C) Copyright 2016-2018 teecube
  * (http://teecu.be) and others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,6 +36,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 
+import org.xml.sax.SAXException;
 import t3.Utils;
 import t3.plugin.annotations.Mojo;
 import t3.plugin.annotations.Parameter;
@@ -75,7 +76,7 @@ public class UpdateAliasLibMojo extends BW5ProjectCommonMojo {
     protected Boolean skipUpdateAliasLib;
 
 	protected class RepositoryMarshaller extends XMLMarshall<Repository, ObjectFactory> {
-		public RepositoryMarshaller(File xmlFile) throws JAXBException {
+		public RepositoryMarshaller(File xmlFile) throws JAXBException, SAXException {
 			super(xmlFile);
 		}
 	}
