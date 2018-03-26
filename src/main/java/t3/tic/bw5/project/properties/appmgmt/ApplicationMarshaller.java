@@ -1,5 +1,5 @@
 /**
- * (C) Copyright 2016-2017 teecube
+ * (C) Copyright 2016-2018 teecube
  * (http://teecu.be) and others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,6 +35,7 @@ import com.tibco.xmlns.applicationmanagement.Setting.Java;
 import com.tibco.xmlns.applicationmanagement.Setting.NTService;
 import com.tibco.xmlns.applicationmanagement.Shutdown;
 
+import org.xml.sax.SAXException;
 import t3.xml.RootElementNamespaceFilter.NamespaceDeclaration;
 import t3.xml.XMLMarshall;
 
@@ -43,7 +44,7 @@ public class ApplicationMarshaller extends XMLMarshall<ApplicationType, ObjectFa
 
 	private ApplicationType application;
 
-	public ApplicationMarshaller(File xmlFile) throws JAXBException {
+	public ApplicationMarshaller(File xmlFile) throws JAXBException, SAXException {
 		super(xmlFile, com.tibco.xmlns.applicationmanagement.bw.ObjectFactory.class,
 					   com.tibco.xmlns.authentication.ObjectFactory.class,
 					   com.tibco.xmlns.dd.ObjectFactory.class);

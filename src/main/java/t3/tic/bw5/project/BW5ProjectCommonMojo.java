@@ -1,5 +1,5 @@
 /**
- * (C) Copyright 2016-2017 teecube
+ * (C) Copyright 2016-2018 teecube
  * (http://teecu.be) and others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.dependency.resolvers.ResolveDependenciesMojo;
+import org.apache.maven.plugins.dependency.resolvers.ResolveDependenciesMojo;
 import org.apache.maven.project.MavenProject;
 import org.apache.tools.ant.taskdefs.optional.ReplaceRegExp;
 
@@ -183,9 +183,9 @@ public abstract class BW5ProjectCommonMojo extends BW5CommonMojo {
     protected class ResolveDependenciesWithProjectMojo extends ResolveDependenciesMojo {
 
 		public void setProject(MavenProject aProject) {
-			this.project = aProject;
-			this.silent = true;
+			this.setSilent(true);
 		}
+
     }
 
     /**
@@ -541,7 +541,7 @@ public abstract class BW5ProjectCommonMojo extends BW5CommonMojo {
 
 	/**
 	 * <p>
-	 * This will create the '.designtimelibs' file in {@link targetProjectSource}
+	 * This will create the '.designtimelibs' file in {@link BW5ProjectCommonMojo#targetProjectSource}
 	 * which is basically the path to the temporary BusinessWorks project being
 	 * built.
 	 * </p>

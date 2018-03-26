@@ -1,5 +1,5 @@
 /**
- * (C) Copyright 2016-2017 teecube
+ * (C) Copyright 2016-2018 teecube
  * (http://teecu.be) and others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +32,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 
+import org.xml.sax.SAXException;
 import t3.SortedProperties;
 import t3.plugin.annotations.Mojo;
 import t3.plugin.annotations.Parameter;
@@ -114,7 +115,7 @@ public class PropertiesToXMLMojo extends PackagingCommonMojo {
 		try {
 			applicationManager = new ApplicationMarshaller(deploymentDescriptorMerged);
 			application = applicationManager.getObject();
-		} catch (JAXBException e) {
+		} catch (JAXBException | SAXException e) {
 			throw new MojoExecutionException(Messages.APPLICATION_MANAGEMENT_LOAD_FAILURE + " '" + deploymentDescriptorMerged + "'", e);
 		}
 	}
