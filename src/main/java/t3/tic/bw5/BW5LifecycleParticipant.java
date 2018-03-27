@@ -37,6 +37,7 @@ import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 
 import t3.AdvancedMavenLifecycleParticipant;
+import t3.CommonMavenLifecycleParticipant;
 import t3.CommonMojo;
 import t3.plugin.PluginConfigurator;
 import t3.plugin.PluginManager;
@@ -50,39 +51,28 @@ import t3.tic.bw5.project.BW5ProjectCommonMojo;
  *
  */
 @Component(role = AbstractMavenLifecycleParticipant.class, hint = "TICBW5LifecycleParticipant")
-public class BW5LifecycleParticipant extends AbstractMavenLifecycleParticipant implements AdvancedMavenLifecycleParticipant {
-
-    @Requirement
-    private PlexusContainer plexus;
-
-	@Requirement
-	private Logger logger;
-
-	@Requirement
-	private ArtifactRepositoryFactory artifactRepositoryFactory;
-
-	@Requirement
-	protected BuildPluginManager pluginManager;
-
-	@Requirement
-	protected ProjectBuilder projectBuilder;
-
-	@org.apache.maven.plugins.annotations.Component
-	protected PluginDescriptor pluginDescriptor; // plugin descriptor of this plugin
+public class BW5LifecycleParticipant extends CommonMavenLifecycleParticipant implements AdvancedMavenLifecycleParticipant {
 
 	public final static String pluginGroupId = "io.teecube.tic";
 	public final static String pluginArtifactId = "tic-bw5";
-	public final static String pluginKey = BW5LifecycleParticipant.pluginGroupId + ":" + BW5LifecycleParticipant.pluginArtifactId;
-
-	private CommonMojo propertiesManager;
 
 	@Override
-	public void afterProjectsRead(MavenSession session)	throws MavenExecutionException {
-		fixStandalonePOM(session.getCurrentProject(), new File(session.getRequest().getBaseDirectory()));
+	protected String getPluginGroupId() {
+		return pluginGroupId;
+	}
 
-		propertiesManager = CommonMojo.propertiesManager(session, session.getCurrentProject());
-		PluginConfigurator.propertiesManager = propertiesManager;
+	@Override
+	protected String getPluginArtifactId() {
+		return pluginArtifactId;
+	}
 
+	@Override
+	protected String loadedMessage() {
+		return Messages.LOADED;
+	}
+
+	@Override
+	protected void initProjects(MavenSession session) throws MavenExecutionException {
 		List<MavenProject> projects = prepareProjects(session.getProjects(), session);
 		session.setProjects(projects);
 
@@ -95,12 +85,10 @@ public class BW5LifecycleParticipant extends AbstractMavenLifecycleParticipant i
 		PropertiesEnforcer.setCustomProperty(session, "sampleProfileCommandLine", GenerateGlobalParametersDocMojo.standaloneGenerator(session.getCurrentProject(), this.getClass()).getFullSampleProfileForCommandLine("tic-bw5", "| ")); // TODO: retrieve artifactId with pluginDescriptor
 
 		if (!ignoreRules(session)) {
-			PropertiesEnforcer.enforceProperties(session, pluginManager, logger, projectPackagings, BW5LifecycleParticipant.class, pluginKey); // check that all mandatory properties are correct
+			PropertiesEnforcer.enforceProperties(session, pluginManager, logger, projectPackagings, BW5LifecycleParticipant.class, getPluginKey()); // check that all mandatory properties are correct
 		}
 
 		PluginManager.registerCustomPluginManager(pluginManager, new BW5MojosFactory()); // to inject Global Parameters in Mojos
-
-		logger.info(Messages.LOADED);
 	}
 
 	private boolean ignoreRules(MavenSession session) {
@@ -118,14 +106,6 @@ public class BW5LifecycleParticipant extends AbstractMavenLifecycleParticipant i
 		}
 	}
 
-	private void fixStandalonePOM(MavenProject mavenProject, File requestBaseDirectory) {
-		if (mavenProject == null) return;
-
-		if ("standalone-pom".equals(mavenProject.getArtifactId()) && requestBaseDirectory != null) {
-			mavenProject.setFile(new File(requestBaseDirectory, "pom.xml"));
-		}
-	}
-
 	/**
 	 * <p>
 	 *
@@ -133,7 +113,6 @@ public class BW5LifecycleParticipant extends AbstractMavenLifecycleParticipant i
 	 *
 	 * @param session
 	 * @param projects
-	 * @param projectBuildingRequest
 	 * @throws MavenExecutionException
 	 */
 	private List<MavenProject> prepareProjects(List<MavenProject> projects, MavenSession session) throws MavenExecutionException {
@@ -151,7 +130,7 @@ public class BW5LifecycleParticipant extends AbstractMavenLifecycleParticipant i
 				switch (mavenProject.getPackaging()) {
 				case BW5ProjectCommonMojo.PROJLIB_TYPE:
 				case BW5ProjectCommonMojo.BWEAR_TYPE:
-					PluginConfigurator.updatePluginsConfiguration(mavenProject, session, true, BW5LifecycleParticipant.class, logger, pluginKey);
+					PluginConfigurator.updatePluginsConfiguration(mavenProject, session, true, BW5LifecycleParticipant.class, logger, getPluginKey());
 					if (session.getGoals().contains(BW5ProjectCommonMojo.DESIGNER_GOAL)) {
 						removeCompileGoal(mavenProject);
 					}
@@ -180,30 +159,6 @@ public class BW5LifecycleParticipant extends AbstractMavenLifecycleParticipant i
 				}
 			}
 		}
-	}
-
-	public void setPlexus(PlexusContainer plexus) {
-		this.plexus = plexus;
-	}
-
-	public void setLogger(Logger logger) {
-		this.logger = logger;
-	}
-
-	public void setArtifactRepositoryFactory(ArtifactRepositoryFactory artifactRepositoryFactory) {
-		this.artifactRepositoryFactory = artifactRepositoryFactory;
-	}
-
-	public void setPluginManager(BuildPluginManager pluginManager) {
-		this.pluginManager = pluginManager;
-	}
-
-	public void setProjectBuilder(ProjectBuilder projectBuilder) {
-		this.projectBuilder = projectBuilder;
-	}
-
-	public void setPluginDescriptor(PluginDescriptor pluginDescriptor) {
-		this.pluginDescriptor = pluginDescriptor;
 	}
 
 }

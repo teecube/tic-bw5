@@ -102,8 +102,6 @@ public abstract class BW5ProjectCommonMojo extends BW5CommonMojo {
 	@GlobalParameter (property = BW5MojoInformation.BW5Project.targetTestLib, defaultValue = BW5MojoInformation.BW5Project.targetTestLib_default, category = BW5MojoInformation.BW5Project.category)
 	protected File targetProjectTestLibs;
 
-	protected List<Dependency> resolvedDependencies;
-
     protected List<Dependency> resolvedDependenciesBWEAR;
 
     protected List<Dependency> resolvedDependenciesJAR;
@@ -179,55 +177,6 @@ public abstract class BW5ProjectCommonMojo extends BW5CommonMojo {
     }
 
     /* -------------------- Dependency management --------------------------- */
-
-    protected class ResolveDependenciesWithProjectMojo extends ResolveDependenciesMojo {
-
-		public void setProject(MavenProject aProject) {
-			this.setSilent(true);
-		}
-
-    }
-
-    /**
-     * @param dependencyPredicate
-     * @return
-     * @throws MojoExecutionException
-     */
-	protected List<Dependency> getDependencies(Predicate<Dependency> dependencyPredicate) throws MojoExecutionException {
-		if (resolvedDependencies != null) {
-			if (resolvedDependencies.isEmpty()) {
-				return resolvedDependencies;
-			} else {
-				return Lists.newArrayList(Collections2.filter(resolvedDependencies, dependencyPredicate));
-			}
-		}
-
-		resolvedDependencies = new ArrayList<Dependency>();
-		ResolveDependenciesWithProjectMojo rdm = new ResolveDependenciesWithProjectMojo();
-		rdm.setProject(project);
-		try {
-			rdm.execute();
-			Set<Artifact> dependencies = rdm.getResults().getResolvedDependencies();
-
-			for (Artifact artifact : dependencies) {
-				Dependency d = new Dependency();
-				d.setGroupId(artifact.getGroupId());
-				d.setArtifactId(artifact.getArtifactId());
-				d.setVersion(artifact.getVersion());
-				d.setType(artifact.getType());
-				d.setClassifier(artifact.getClassifier());
-				resolvedDependencies.add(d);
-			}
-		} catch (MojoFailureException e) {
-			throw new MojoExecutionException(e.getLocalizedMessage(), e);
-		}
-
-		if (resolvedDependencies.isEmpty()) {
-			return resolvedDependencies;
-		} else {
-			return Lists.newArrayList(Collections2.filter(resolvedDependencies, dependencyPredicate));
-		}
-	}
 
 	/**
 	 * @return the list of BW EARs Dependencies from the POM project
