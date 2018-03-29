@@ -16,31 +16,31 @@
  */
 package t3.tic.bw5.project.properties.appmgmt;
 
-import java.math.BigInteger;
-
 import t3.xml.XMLVisitor;
+
+import java.math.BigInteger;
 
 public class Java extends XMLVisitor<com.tibco.xmlns.applicationmanagement.Setting.Java> {
 
-	public Java(com.tibco.xmlns.applicationmanagement.Setting.Java visited) {
-		super(visited);
-	}
+    public Java(com.tibco.xmlns.applicationmanagement.Setting.Java visited) {
+        super(visited);
+    }
 
-	@Override
-	public Object addParameter(String key, String value) {
-		if ("prepandClassPath".equals(key)) {
-			visited().setPrepandClassPath(value);
-		} else if ("appendClassPath".equals(key)) {
-			visited().setAppendClassPath(value);
-		} else if ("initHeapSize".equals(key)) {
-			visited().setInitHeapSize(BigInteger.valueOf(Long.parseLong(value)));
-		} else if ("maxHeapSize".equals(key)) {
-			visited().setMaxHeapSize(BigInteger.valueOf(Long.parseLong(value)));
-		} else if ("threadStackSize".equals(key)) {
-			visited().setThreadStackSize(BigInteger.valueOf(Long.parseLong(value)));
-		}
+    @Override
+    public Object addParameter(String key, String value) {
+        if ("prepandClassPath".equals(key)) {
+            visited().setPrepandClassPath(value);
+        } else if ("appendClassPath".equals(key)) {
+            visited().setAppendClassPath(value);
+        } else if ("initHeapSize".equals(key)) {
+            visited().setInitHeapSize(BigInteger.valueOf(Long.parseLong(value)));
+        } else if ("maxHeapSize".equals(key)) {
+            visited().setMaxHeapSize(BigInteger.valueOf(Long.parseLong(value)));
+        } else if ("threadStackSize".equals(key)) {
+            visited().setThreadStackSize(BigInteger.valueOf(Long.parseLong(value)));
+        }
 
-		return visited();
-	}
+        return visited();
+    }
 
 }

@@ -16,13 +16,13 @@
  */
 package t3.tic.bw5.project.properties;
 
-import java.io.File;
-
 import t3.plugin.annotations.GlobalParameter;
 import t3.plugin.annotations.Parameter;
 import t3.tic.bw5.BW5MojoInformation;
 import t3.tic.bw5.Messages;
 import t3.tic.bw5.project.BW5ProjectCommonMojo;
+
+import java.io.File;
 
 /**
  *
@@ -31,32 +31,32 @@ import t3.tic.bw5.project.BW5ProjectCommonMojo;
  */
 public abstract class PackagingCommonMojo extends BW5ProjectCommonMojo {
 
-	/**
-	 * <p>
-	 * Path to the packaging directory.
-	 * </p>
-	 */
-	@GlobalParameter (property = BW5MojoInformation.BW5EAR.Packaging.directory, defaultValue = BW5MojoInformation.BW5EAR.Packaging.directory_default, description = BW5MojoInformation.BW5EAR.Packaging.directory_description, category = BW5MojoInformation.BW5EAR.category)
-	protected File targetProjectPacakge;
+    /**
+     * <p>
+     * Path to the packaging directory.
+     * </p>
+     */
+    @GlobalParameter (property = BW5MojoInformation.BW5EAR.Packaging.directory, defaultValue = BW5MojoInformation.BW5EAR.Packaging.directory_default, description = BW5MojoInformation.BW5EAR.Packaging.directory_description, category = BW5MojoInformation.BW5EAR.category)
+    protected File targetProjectPacakge;
 
-	public boolean skip() {
-		if (skipPackage) {
-			getLog().info(Messages.SKIPPING);
-		}
-		return skipPackage;
-	}
+    public boolean skip() {
+        if (skipPackage) {
+            getLog().info(Messages.SKIPPING);
+        }
+        return skipPackage;
+    }
 
-	/**
-	 * <p>
-	 * Whether to skip the packaging goals (including this goal).
-	 * </p>
-	 */
+    /**
+     * <p>
+     * Whether to skip the packaging goals (including this goal).
+     * </p>
+     */
     @Parameter (property=BW5MojoInformation.BW5EAR.Packaging.skip, required=false, defaultValue=BW5MojoInformation.BW5EAR.Packaging.skip_default)
     protected Boolean skipPackage;
 
-	@Override
-	public String getArtifactFileExtension() {
-		return null;
-	}
+    @Override
+    public String getArtifactFileExtension() {
+        return null;
+    }
 
 }

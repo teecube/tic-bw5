@@ -16,25 +16,25 @@
  */
 package t3.tic.bw5.project.properties.appmgmt;
 
-import java.math.BigInteger;
-
 import t3.xml.XMLVisitor;
+
+import java.math.BigInteger;
 
 public class Shutdown extends XMLVisitor<com.tibco.xmlns.applicationmanagement.Shutdown> {
 
-	public Shutdown(com.tibco.xmlns.applicationmanagement.Shutdown visited) {
-		super(visited);
-	}
+    public Shutdown(com.tibco.xmlns.applicationmanagement.Shutdown visited) {
+        super(visited);
+    }
 
-	@Override
-	public Object addParameter(String key, String value) {
-		if ("checkpoint".equals(key)) {
-			visited().setCheckpoint(Boolean.parseBoolean(value));
-		} else if ("timeout".equals(key)) {
-			visited().setTimeout(BigInteger.valueOf(Long.parseLong(value)));
-		}
-		
-		return visited();
-	}
+    @Override
+    public Object addParameter(String key, String value) {
+        if ("checkpoint".equals(key)) {
+            visited().setCheckpoint(Boolean.parseBoolean(value));
+        } else if ("timeout".equals(key)) {
+            visited().setTimeout(BigInteger.valueOf(Long.parseLong(value)));
+        }
+        
+        return visited();
+    }
 
 }

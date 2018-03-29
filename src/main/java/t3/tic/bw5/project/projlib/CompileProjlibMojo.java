@@ -16,20 +16,19 @@
  */
 package t3.tic.bw5.project.projlib;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
-
 import t3.plugin.annotations.Mojo;
 import t3.plugin.annotations.Parameter;
 import t3.tic.bw5.BW5Artifact;
 import t3.tic.bw5.BW5MojoInformation;
 import t3.tic.bw5.Messages;
 import t3.tic.bw5.project.BW5ProjectCommonMojo;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * <p>
@@ -45,23 +44,23 @@ import t3.tic.bw5.project.BW5ProjectCommonMojo;
 @Mojo(name="compile-projlib", defaultPhase = LifecyclePhase.COMPILE, requiresProject = true)
 public class CompileProjlibMojo extends BW5ProjectCommonMojo implements BW5Artifact {
 
-	/**
-	 * <p>
-	 * Allows to ignore any alias when building EAR or Projlib.
-	 * This will mimic the "Hide Library Resources" behaviour of the TIBCO
-	 * Designer.
-	 * </p>
-	 */
-	@Parameter (property = BW5MojoInformation.BW5Project.hideLibraryResources, defaultValue = BW5MojoInformation.BW5Project.hideLibraryResources_default)
-	protected boolean hideLibraryResources;
+    /**
+     * <p>
+     * Allows to ignore any alias when building EAR or Projlib.
+     * This will mimic the "Hide Library Resources" behaviour of the TIBCO
+     * Designer.
+     * </p>
+     */
+    @Parameter (property = BW5MojoInformation.BW5Project.hideLibraryResources, defaultValue = BW5MojoInformation.BW5Project.hideLibraryResources_default)
+    protected boolean hideLibraryResources;
 
-	/**
-	 * <p>
-	 * Path to the "LibBuilder" relatively to the BusinessWorks project path.
-	 * </p>
-	 */
-	@Parameter (property=BW5MojoInformation.BW5Projlib.libraryBuilder, required = true, requiredForPackagings = {"bw5-projlib"}, defaultValue = "")
-	protected String libraryBuilder;
+    /**
+     * <p>
+     * Path to the "LibBuilder" relatively to the BusinessWorks project path.
+     * </p>
+     */
+    @Parameter (property=BW5MojoInformation.BW5Projlib.libraryBuilder, required = true, requiredForPackagings = {"bw5-projlib"}, defaultValue = "")
+    protected String libraryBuilder;
 
     /**
      * <p>
@@ -91,89 +90,89 @@ public class CompileProjlibMojo extends BW5ProjectCommonMojo implements BW5Artif
     @Parameter (property=BW5MojoInformation.BW5Projlib.skipTouch, required=false, defaultValue=BW5MojoInformation.BW5Projlib.skipTouch_default)
     protected Boolean touchProjlibIfSkipped;
 
-	@Override
-	public String getArtifactFileExtension() {
-		return ".projlib"; // TODO : externalize
-	}
+    @Override
+    public String getArtifactFileExtension() {
+        return ".projlib"; // TODO : externalize
+    }
 
-	/**
-	 * <P>
-	 * This calls the "buildlibrary" binary found in TIBCO Designer to build
-	 * a Projlib for the {@link AbstractBWMojo#project}, defined by the
-	 * {@link CompileProjlibMojo#libraryBuilder}.
-	 * </p>
-	 *
-	 * @param outputFile, the path where the Projlib output will be created
-	 * @throws MojoExecutionException
-	 * @throws IOException
-	 */
-	private void buildProjlib(File outputFile) throws MojoExecutionException, IOException {
-		assert(outputFile != null);
+    /**
+     * <P>
+     * This calls the "buildlibrary" binary found in TIBCO Designer to build
+     * a Projlib for the current project, defined by the
+     * {@link CompileProjlibMojo#libraryBuilder}.
+     * </p>
+     *
+     * @param outputFile, the path where the Projlib output will be created
+     * @throws MojoExecutionException
+     * @throws IOException
+     */
+    private void buildProjlib(File outputFile) throws MojoExecutionException, IOException {
+        assert(outputFile != null);
 
-		ArrayList<String> arguments = new ArrayList<String>();
-		arguments.add("-lib"); // path of the libbuilder relative to the BW project path
-		arguments.add(libraryBuilder);
-		arguments.add("-p"); // BW project path
-		arguments.add(targetProjectSource.getAbsolutePath());
-		arguments.add("-o"); // output file
-		arguments.add(outputFile.getAbsolutePath());
-		arguments.add("-x"); // overwrite the output
-		if (!hideLibraryResources) {
-			arguments.add("-v"); // validate the project
-		}
+        ArrayList<String> arguments = new ArrayList<String>();
+        arguments.add("-lib"); // path of the libbuilder relative to the BW project path
+        arguments.add(libraryBuilder);
+        arguments.add("-p"); // BW project path
+        arguments.add(targetProjectSource.getAbsolutePath());
+        arguments.add("-o"); // output file
+        arguments.add(outputFile.getAbsolutePath());
+        arguments.add("-x"); // overwrite the output
+        if (!hideLibraryResources) {
+            arguments.add("-v"); // validate the project
+        }
 
-		getLog().info(Messages.BUILDING_PROJLIB);
+        getLog().info(Messages.BUILDING_PROJLIB);
 
-		ArrayList<File> tras = new ArrayList<File>();
-		tras.add(tibcoBuildLibraryTRA);
-//		if (tibcoBuildLibraryUseDesignerTRA) {
-			tras.add(tibcoDesignerTRA);
-//		}
-		executeTIBCOBinary(tibcoBuildLibrary, tras, arguments, directory, Messages.BUILD_PROJLIB_FAILED);
-	}
+        ArrayList<File> tras = new ArrayList<File>();
+        tras.add(tibcoBuildLibraryTRA);
+//        if (tibcoBuildLibraryUseDesignerTRA) {
+            tras.add(tibcoDesignerTRA);
+//        }
+        executeTIBCOBinary(tibcoBuildLibrary, tras, arguments, directory, Messages.BUILD_PROJLIB_FAILED);
+    }
 
-	@Override
-	public void execute() throws MojoExecutionException, MojoFailureException {
-		if (skipCompile || skipProjlibCompile) {
-			getLog().info(Messages.SKIPPING_PROJLIB);
+    @Override
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        if (skipCompile || skipProjlibCompile) {
+            getLog().info(Messages.SKIPPING_PROJLIB);
 
-			File outputFile = getOutputFile(false);
-			if (outputFile != null && !outputFile.exists()
-					&& touchProjlibIfSkipped) {
-				// Projlib was not created because compilation is skipped
-				// however we "touch" the Projlib file so there is an empty
-				// Projlib file created
-				try {
-					outputFile.getParentFile().mkdirs();
-					outputFile.createNewFile();
-				} catch (IOException e) {
-					throw new MojoExecutionException(e.getLocalizedMessage(), e);
-				}
-			}
-			if (outputFile != null && outputFile.exists()) {
-				attachArtifact(outputFile);
-			} else {
-				getLog().warn(Messages.WARN_NO_ARTIFACT_ATTACHED);
-			}
-			return;
-		}
+            File outputFile = getOutputFile(false);
+            if (outputFile != null && !outputFile.exists()
+                    && touchProjlibIfSkipped) {
+                // Projlib was not created because compilation is skipped
+                // however we "touch" the Projlib file so there is an empty
+                // Projlib file created
+                try {
+                    outputFile.getParentFile().mkdirs();
+                    outputFile.createNewFile();
+                } catch (IOException e) {
+                    throw new MojoExecutionException(e.getLocalizedMessage(), e);
+                }
+            }
+            if (outputFile != null && outputFile.exists()) {
+                attachArtifact(outputFile);
+            } else {
+                getLog().warn(Messages.WARN_NO_ARTIFACT_ATTACHED);
+            }
+            return;
+        }
 
-		if (isCurrentGoal(DESIGNER_GOAL)) {
-			return; // ignore
-		}
+        if (isCurrentGoal(DESIGNER_GOAL)) {
+            return; // ignore
+        }
 
-		super.execute();
+        super.execute();
         translateDependenciesModels(hideLibraryResources);
 
-		File outputFile = getOutputFile(false);
+        File outputFile = getOutputFile(false);
 
-		try {
-			buildProjlib(outputFile);
-		} catch (IOException e) {
-			throw new MojoExecutionException(Messages.BUILD_PROJLIB_FAILED, e);
-		}
+        try {
+            buildProjlib(outputFile);
+        } catch (IOException e) {
+            throw new MojoExecutionException(Messages.BUILD_PROJLIB_FAILED, e);
+        }
 
-		attachArtifact(outputFile);
-	}
+        attachArtifact(outputFile);
+    }
 
 }

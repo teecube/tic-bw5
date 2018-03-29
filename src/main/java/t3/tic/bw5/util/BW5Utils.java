@@ -18,7 +18,6 @@ package t3.tic.bw5.util;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.Dependency;
-
 import t3.tic.bw5.project.BW5ProjectCommonMojo;
 
 /**
@@ -28,28 +27,28 @@ import t3.tic.bw5.project.BW5ProjectCommonMojo;
  */
 public class BW5Utils {
 
-	public static Boolean isBW5(Dependency dependency) {
-		if (dependency == null) return false;
-		return isBW5(dependency.getType());
-	}
+    public static Boolean isBW5(Dependency dependency) {
+        if (dependency == null) return false;
+        return isBW5(dependency.getType());
+    }
 
-	public static  Boolean isBW5(Artifact artifact) {
-		if (artifact == null) return false;
-		return isBW5(artifact.getType());
-	}
+    public static  Boolean isBW5(Artifact artifact) {
+        if (artifact == null) return false;
+        return isBW5(artifact.getType());
+    }
 
-	private static Boolean isBW5(String type) {
-		if (type == null) {
-			return false;
-		}
+    private static Boolean isBW5(String type) {
+        if (type == null) {
+            return false;
+        }
 
-		switch (type) {
-		case BW5ProjectCommonMojo.PROJLIB_TYPE:
-		case BW5ProjectCommonMojo.BWEAR_TYPE:
-			return true;
-		default:
-			return false;
-		}
-	}
+        switch (type) {
+        case BW5ProjectCommonMojo.PROJLIB_TYPE:
+        case BW5ProjectCommonMojo.BWEAR_TYPE:
+            return true;
+        default:
+            return false;
+        }
+    }
 
 }

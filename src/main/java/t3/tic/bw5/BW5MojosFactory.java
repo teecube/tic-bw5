@@ -17,7 +17,6 @@
 package t3.tic.bw5;
 
 import org.apache.maven.plugin.AbstractMojo;
-
 import t3.MojosFactory;
 import t3.tic.bw5.project.DesignerMojo;
 import t3.tic.bw5.project.UpdateAliasLibMojo;
@@ -31,41 +30,41 @@ import t3.tic.bw5.project.properties.XMLToPropertiesMojo;
 
 public class BW5MojosFactory extends MojosFactory {
 
-	@SuppressWarnings("unchecked")
-	public <T extends AbstractMojo> T getMojo(Class<T> type) {
-		if (type == null) {
-			return null;
-		}
+    @SuppressWarnings("unchecked")
+    public <T extends AbstractMojo> T getMojo(Class<T> type) {
+        if (type == null) {
+            return null;
+        }
 
-		String typeName = type.getSimpleName();
+        String typeName = type.getSimpleName();
 
-		switch (typeName) {
-		// project
-		case "DesignerMojo":
-			return (T) new DesignerMojo();
-		case "UpdateAliasLibMojo":
-			return (T) new UpdateAliasLibMojo();
-			// ear
-			case "CompileEARMojo":
-				return (T) new CompileEARMojo();
-			case "IncludeDependenciesInEARMojo":
-				return (T) new IncludeDependenciesInEARMojo();
-				// packaging
-				case "PropertiesMergeMojo":
-					return (T) new PropertiesMergeMojo();
-				case "PropertiesToXMLMojo":
-					return (T) new PropertiesToXMLMojo();
-				case "XMLFromEARMojo":
-					return (T) new XMLFromEARMojo();
-				case "XMLToPropertiesMojo":
-					return (T) new XMLToPropertiesMojo();
-			// projlib
-			case "CompileProjlibMojo":
-				return (T) new CompileProjlibMojo();
-		default:
-			return super.getMojo(type);
-		}
+        switch (typeName) {
+        // project
+        case "DesignerMojo":
+            return (T) new DesignerMojo();
+        case "UpdateAliasLibMojo":
+            return (T) new UpdateAliasLibMojo();
+            // ear
+            case "CompileEARMojo":
+                return (T) new CompileEARMojo();
+            case "IncludeDependenciesInEARMojo":
+                return (T) new IncludeDependenciesInEARMojo();
+                // packaging
+                case "PropertiesMergeMojo":
+                    return (T) new PropertiesMergeMojo();
+                case "PropertiesToXMLMojo":
+                    return (T) new PropertiesToXMLMojo();
+                case "XMLFromEARMojo":
+                    return (T) new XMLFromEARMojo();
+                case "XMLToPropertiesMojo":
+                    return (T) new XMLToPropertiesMojo();
+            // projlib
+            case "CompileProjlibMojo":
+                return (T) new CompileProjlibMojo();
+        default:
+            return super.getMojo(type);
+        }
 
-	}
+    }
 
 }

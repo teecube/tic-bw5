@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.tibco.com/xmlns/ApplicationManagement",
-									 xmlns={@XmlNs(namespaceURI = "http://www.tibco.com/xmlns/ApplicationManagement", prefix = ""),
-											@XmlNs(namespaceURI = "http://www.tibco.com/xmlns/dd", prefix = "dd"),
-											@XmlNs(namespaceURI = "http://www.tibco.com/xmlns/ApplicationManagement/BW", prefix = "bw"),
-											@XmlNs(namespaceURI = "http://www.tibco.com/xmlns/authentication", prefix = "auth")},
-									 elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+                                     xmlns={@XmlNs(namespaceURI = "http://www.tibco.com/xmlns/ApplicationManagement", prefix = ""),
+                                            @XmlNs(namespaceURI = "http://www.tibco.com/xmlns/dd", prefix = "dd"),
+                                            @XmlNs(namespaceURI = "http://www.tibco.com/xmlns/ApplicationManagement/BW", prefix = "bw"),
+                                            @XmlNs(namespaceURI = "http://www.tibco.com/xmlns/authentication", prefix = "auth")},
+                                     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package t3.tic.bw5.project.properties.appmgmt;
 
 import javax.xml.bind.annotation.XmlNs;

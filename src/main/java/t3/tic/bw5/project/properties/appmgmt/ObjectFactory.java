@@ -16,19 +16,19 @@
  */
 package t3.tic.bw5.project.properties.appmgmt;
 
+import com.tibco.xmlns.applicationmanagement.ServiceType;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-import com.tibco.xmlns.applicationmanagement.ServiceType;
-
 @XmlRegistry
 public class ObjectFactory extends com.tibco.xmlns.applicationmanagement.ObjectFactory {
 
-	protected final static QName _Application_QNAME = new QName("http://www.tibco.com/xmlns/ApplicationManagement", "application");
-	protected final static QName _BaseService_QNAME = new QName("http://www.tibco.com/xmlns/ApplicationManagement", "baseService");
-	protected final static QName _Bw_QNAME = new QName("http://www.tibco.com/xmlns/ApplicationManagement", "bw");
+    protected final static QName _Application_QNAME = new QName("http://www.tibco.com/xmlns/ApplicationManagement", "application");
+    protected final static QName _BaseService_QNAME = new QName("http://www.tibco.com/xmlns/ApplicationManagement", "baseService");
+    protected final static QName _Bw_QNAME = new QName("http://www.tibco.com/xmlns/ApplicationManagement", "bw");
 
     /**
      * Create an instance of {@link ApplicationType }

@@ -20,20 +20,20 @@ import t3.xml.XMLVisitor;
 
 public class Product extends XMLVisitor<com.tibco.xmlns.applicationmanagement.Product> {
 
-	public Product(com.tibco.xmlns.applicationmanagement.Product visited) {
-		super(visited);
-	}
+    public Product(com.tibco.xmlns.applicationmanagement.Product visited) {
+        super(visited);
+    }
 
-	@Override
-	public Object addParameter(String key, String value) {
-		if ("type".equals(key)) {
-			visited().setType(value);
-		} else if ("version".equals(key)) {
-			visited().setVersion(value);
-		} else if ("location".equals(key)) {
-			visited().setLocation(value);
-		}
-		return visited();
-	}
+    @Override
+    public Object addParameter(String key, String value) {
+        if ("type".equals(key)) {
+            visited().setType(value);
+        } else if ("version".equals(key)) {
+            visited().setVersion(value);
+        } else if ("location".equals(key)) {
+            visited().setLocation(value);
+        }
+        return visited();
+    }
 
 }

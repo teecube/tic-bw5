@@ -20,14 +20,14 @@ import t3.xml.XMLVisitor;
 
 public class Checkpoints extends XMLVisitor<com.tibco.xmlns.applicationmanagement.Checkpoints>{
 
-	public Checkpoints(com.tibco.xmlns.applicationmanagement.Checkpoints visited) {
-		super(visited);
-	}
+    public Checkpoints(com.tibco.xmlns.applicationmanagement.Checkpoints visited) {
+        super(visited);
+    }
 
-	@Override
-	public Object addParameter(String key, String value) {
-		// TODO Auto-generated method stub
-		return visited();
-	}
+    @Override
+    public Object addParameter(String key, String value) {
+        // TODO Auto-generated method stub
+        return visited();
+    }
 
 }
