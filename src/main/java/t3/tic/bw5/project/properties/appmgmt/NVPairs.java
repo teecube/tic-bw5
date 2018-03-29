@@ -1,5 +1,5 @@
 /**
- * (C) Copyright 2016-2017 teecube
+ * (C) Copyright 2016-2018 teecube
  * (http://teecu.be) and others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,83 +16,82 @@
  */
 package t3.tic.bw5.project.properties.appmgmt;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
 import com.tibco.xmlns.applicationmanagement.NVPairType;
 import com.tibco.xmlns.applicationmanagement.NameValuePair;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+import java.util.ArrayList;
+import java.util.List;
+
 public class NVPairs extends com.tibco.xmlns.applicationmanagement.NVPairs {
 
-	private com.tibco.xmlns.applicationmanagement.NVPairs nvPairs;
+    private com.tibco.xmlns.applicationmanagement.NVPairs nvPairs;
 
-	public static List<NVPairs> convertList(List<com.tibco.xmlns.applicationmanagement.NVPairs> nvPairsList) {
-		if (nvPairsList == null) {
-			return null;
-		}
+    public static List<NVPairs> convertList(List<com.tibco.xmlns.applicationmanagement.NVPairs> nvPairsList) {
+        if (nvPairsList == null) {
+            return null;
+        }
 
-		ArrayList<NVPairs> result = new ArrayList<NVPairs>();
+        ArrayList<NVPairs> result = new ArrayList<NVPairs>();
 
-		for (com.tibco.xmlns.applicationmanagement.NVPairs nvPairs : nvPairsList) {
-			result.add(new NVPairs(nvPairs));
-		}
+        for (com.tibco.xmlns.applicationmanagement.NVPairs nvPairs : nvPairsList) {
+            result.add(new NVPairs(nvPairs));
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	public NVPairs() {
-		this(new com.tibco.xmlns.applicationmanagement.NVPairs());
-	}
+    public NVPairs() {
+        this(new com.tibco.xmlns.applicationmanagement.NVPairs());
+    }
 
-	public NVPairs(String name) {
-		this(new com.tibco.xmlns.applicationmanagement.NVPairs());
-		this.name = name;
-	}
+    public NVPairs(String name) {
+        this(new com.tibco.xmlns.applicationmanagement.NVPairs());
+        this.name = name;
+    }
 
-	public NVPairs(com.tibco.xmlns.applicationmanagement.NVPairs nvPairs) {
-		this.nvPairs = nvPairs;
-		if (nvPairs != null) {
-			this.name = nvPairs.getName();
-			this.nvPair = nvPairs.getNVPair();
-		} else {
-			this.name = "";
-			this.nvPair = new ArrayList<JAXBElement<? extends NVPairType>>();
-		}
-	}
+    public NVPairs(com.tibco.xmlns.applicationmanagement.NVPairs nvPairs) {
+        this.nvPairs = nvPairs;
+        if (nvPairs != null) {
+            this.name = nvPairs.getName();
+            this.nvPair = nvPairs.getNVPair();
+        } else {
+            this.name = "";
+            this.nvPair = new ArrayList<JAXBElement<? extends NVPairType>>();
+        }
+    }
 
-	public NameValuePair get(String name) {
-		NameValuePair result = null;
-		if (name != null) {
-			for (JAXBElement<? extends NVPairType> j : this.nvPairs.getNVPair()) {
-				if (name.equals(j.getValue().getName())) {
-					result = (NameValuePair) j.getValue();
-					break;
-				}
-			}
-		}
-		return result;
-	}
+    public NameValuePair get(String name) {
+        NameValuePair result = null;
+        if (name != null) {
+            for (JAXBElement<? extends NVPairType> j : this.nvPairs.getNVPair()) {
+                if (name.equals(j.getValue().getName())) {
+                    result = (NameValuePair) j.getValue();
+                    break;
+                }
+            }
+        }
+        return result;
+    }
 
-	public void put(String name, String value) {
-		put(name, value, "");
-	}
+    public void put(String name, String value) {
+        put(name, value, "");
+    }
 
-	public void put(String name, String value, String description) {
-		NameValuePair pair = get(name);
-		if (pair == null) {
-			pair = new NameValuePair();
-			pair.setName(name);
+    public void put(String name, String value, String description) {
+        NameValuePair pair = get(name);
+        if (pair == null) {
+            pair = new NameValuePair();
+            pair.setName(name);
 
-			QName qName = new QName(ApplicationMarshaller.NAMESPACE, "NameValuePair");
-			JAXBElement<NameValuePair> _pair = new JAXBElement<NameValuePair>(qName, NameValuePair.class, pair);
+            QName qName = new QName(ApplicationMarshaller.NAMESPACE, "NameValuePair");
+            JAXBElement<NameValuePair> _pair = new JAXBElement<NameValuePair>(qName, NameValuePair.class, pair);
 
-			this.nvPairs.getNVPair().add(_pair);
-		}
-		pair.setValue(value);
-		pair.setDescription(description);
-	}
+            this.nvPairs.getNVPair().add(_pair);
+        }
+        pair.setValue(value);
+        pair.setDescription(description);
+    }
 
 }

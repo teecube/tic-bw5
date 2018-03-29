@@ -1,5 +1,5 @@
 /**
- * (C) Copyright 2016-2017 teecube
+ * (C) Copyright 2016-2018 teecube
  * (http://teecu.be) and others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,31 +16,31 @@
  */
 package t3.tic.bw5.project.properties.appmgmt;
 
-import java.math.BigInteger;
-
 import t3.xml.XMLVisitor;
+
+import java.math.BigInteger;
 
 public class Bwprocess extends XMLVisitor<com.tibco.xmlns.applicationmanagement.Bwprocess> {
 
-	public Bwprocess(com.tibco.xmlns.applicationmanagement.Bwprocess visited) {
-		super(visited);
-	}
+    public Bwprocess(com.tibco.xmlns.applicationmanagement.Bwprocess visited) {
+        super(visited);
+    }
 
-	@Override
-	public Object addParameter(String key, String value) {
-		if ("starter".equals(key)) {
-			visited().setStarter(value);
-		} else if ("enabled".equals(key)) {
-			visited().setEnabled(Boolean.parseBoolean(value));
-		} else if ("maxJob".equals(key)) {
-			visited().setMaxJob(BigInteger.valueOf(Long.parseLong(value)));
-		} else if ("activation".equals(key)) {
-			visited().setActivation(Boolean.parseBoolean(value));
-		} else if ("flowLimit".equals(key)) {
-			visited().setFlowLimit(BigInteger.valueOf(Long.parseLong(value)));
-		}
+    @Override
+    public Object addParameter(String key, String value) {
+        if ("starter".equals(key)) {
+            visited().setStarter(value);
+        } else if ("enabled".equals(key)) {
+            visited().setEnabled(Boolean.parseBoolean(value));
+        } else if ("maxJob".equals(key)) {
+            visited().setMaxJob(BigInteger.valueOf(Long.parseLong(value)));
+        } else if ("activation".equals(key)) {
+            visited().setActivation(Boolean.parseBoolean(value));
+        } else if ("flowLimit".equals(key)) {
+            visited().setFlowLimit(BigInteger.valueOf(Long.parseLong(value)));
+        }
 
-		return visited();
-	}
+        return visited();
+    }
 
 }

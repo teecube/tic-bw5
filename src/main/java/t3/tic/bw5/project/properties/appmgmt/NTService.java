@@ -1,5 +1,5 @@
 /**
- * (C) Copyright 2016-2017 teecube
+ * (C) Copyright 2016-2018 teecube
  * (http://teecu.be) and others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,22 +20,22 @@ import t3.xml.XMLVisitor;
 
 public class NTService extends XMLVisitor<com.tibco.xmlns.applicationmanagement.Setting.NTService> {
 
-	public NTService(com.tibco.xmlns.applicationmanagement.Setting.NTService visited) {
-		super(visited);
-	}
+    public NTService(com.tibco.xmlns.applicationmanagement.Setting.NTService visited) {
+        super(visited);
+    }
 
-	@Override
-	public Object addParameter(String key, String value) {
-		if ("runAsNT".equals(key)) {
-			visited().setRunAsNT(Boolean.parseBoolean(value));
-		} else if ("startupType".equals(key)) {
-			visited().setStartupType(value);
-		} else if ("loginAs".equals(key)) {
-			visited().setLoginAs(value);
-		} else if ("password".equals(key)) {
-			visited().setPassword(value);
-		}
-		return visited();
-	}
+    @Override
+    public Object addParameter(String key, String value) {
+        if ("runAsNT".equals(key)) {
+            visited().setRunAsNT(Boolean.parseBoolean(value));
+        } else if ("startupType".equals(key)) {
+            visited().setStartupType(value);
+        } else if ("loginAs".equals(key)) {
+            visited().setLoginAs(value);
+        } else if ("password".equals(key)) {
+            visited().setPassword(value);
+        }
+        return visited();
+    }
 
 }

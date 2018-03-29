@@ -1,5 +1,5 @@
 /**
- * (C) Copyright 2016-2017 teecube
+ * (C) Copyright 2016-2018 teecube
  * (http://teecu.be) and others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,9 +16,9 @@
  */
 package t3.tic.bw5;
 
-import java.io.File;
-
 import org.apache.maven.plugin.MojoExecutionException;
+
+import java.io.File;
 
 /**
  *
@@ -27,8 +27,8 @@ import org.apache.maven.plugin.MojoExecutionException;
  */
 public interface BW5Artifact {
 
-	public String getArtifactFileExtension();
-	public File getArtifactFile(File basedir, String finalName, String classifier);
-	public File getOutputFile(boolean failIfNotFound) throws MojoExecutionException;
+    public String getArtifactFileExtension();
+    public File getArtifactFile(File basedir, String finalName, String classifier);
+    public File getOutputFile(boolean failIfNotFound) throws MojoExecutionException;
 
 }
