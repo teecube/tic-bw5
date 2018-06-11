@@ -1,5 +1,5 @@
 /**
- * (C) Copyright 2016-2017 teecube
+ * (C) Copyright 2016-2018 teecube
  * (http://teecu.be) and others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,27 +16,27 @@
  */
 package t3.tic.bw5.project.properties.appmgmt;
 
-import java.math.BigInteger;
-
 import t3.xml.XMLVisitor;
+
+import java.math.BigInteger;
 
 public class FaultTolerant extends XMLVisitor<com.tibco.xmlns.applicationmanagement.FaultTolerant> {
 
-	public FaultTolerant(com.tibco.xmlns.applicationmanagement.FaultTolerant visited) {
-		super(visited);
-	}
+    public FaultTolerant(com.tibco.xmlns.applicationmanagement.FaultTolerant visited) {
+        super(visited);
+    }
 
-	@Override
-	public Object addParameter(String key, String value) {
-		if ("activationInterval".equals(key)) {
-			visited().setActivationInterval(BigInteger.valueOf(Long.parseLong(value)));
-		} else if ("hbInterval".equals(key)) {
-			visited().setHbInterval(BigInteger.valueOf(Long.parseLong(value)));
-		} else if ("preparationDelay".equals(key)) {
-			visited().setPreparationDelay(BigInteger.valueOf(Long.parseLong(value)));
-		}
+    @Override
+    public Object addParameter(String key, String value) {
+        if ("activationInterval".equals(key)) {
+            visited().setActivationInterval(BigInteger.valueOf(Long.parseLong(value)));
+        } else if ("hbInterval".equals(key)) {
+            visited().setHbInterval(BigInteger.valueOf(Long.parseLong(value)));
+        } else if ("preparationDelay".equals(key)) {
+            visited().setPreparationDelay(BigInteger.valueOf(Long.parseLong(value)));
+        }
 
-		return visited();
-	}
-	
+        return visited();
+    }
+    
 }

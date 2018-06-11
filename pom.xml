@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.teecube.tic</groupId>
 		<artifactId>tic</artifactId>
-		<version>0.0.4</version>
+		<version>0.0.6-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>tic-bw5</artifactId>

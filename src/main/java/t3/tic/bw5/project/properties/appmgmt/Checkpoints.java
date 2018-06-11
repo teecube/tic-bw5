@@ -1,5 +1,5 @@
 /**
- * (C) Copyright 2016-2017 teecube
+ * (C) Copyright 2016-2018 teecube
  * (http://teecu.be) and others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,14 +20,14 @@ import t3.xml.XMLVisitor;
 
 public class Checkpoints extends XMLVisitor<com.tibco.xmlns.applicationmanagement.Checkpoints>{
 
-	public Checkpoints(com.tibco.xmlns.applicationmanagement.Checkpoints visited) {
-		super(visited);
-	}
+    public Checkpoints(com.tibco.xmlns.applicationmanagement.Checkpoints visited) {
+        super(visited);
+    }
 
-	@Override
-	public Object addParameter(String key, String value) {
-		// TODO Auto-generated method stub
-		return visited();
-	}
+    @Override
+    public Object addParameter(String key, String value) {
+        // TODO Auto-generated method stub
+        return visited();
+    }
 
 }
