@@ -25,11 +25,11 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.xml.sax.SAXException;
-import t3.Utils;
 import t3.plugin.annotations.Mojo;
 import t3.plugin.annotations.Parameter;
 import t3.tic.bw5.BW5MojoInformation;
 import t3.tic.bw5.Messages;
+import t3.utils.Utils;
 import t3.xml.XMLMarshall;
 
 import javax.xml.bind.JAXBException;

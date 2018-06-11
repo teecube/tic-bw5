@@ -25,7 +25,7 @@ import com.tibco.xmlns.applicationmanagement.Setting;
 import com.tibco.xmlns.applicationmanagement.Setting.Java;
 import com.tibco.xmlns.applicationmanagement.Setting.NTService;
 import com.tibco.xmlns.applicationmanagement.Shutdown;
-import t3.SortedProperties;
+import t3.utils.SortedProperties;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlRootElement;

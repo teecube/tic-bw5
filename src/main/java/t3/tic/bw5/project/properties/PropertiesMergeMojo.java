@@ -21,12 +21,12 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
-import t3.SortedProperties;
-import t3.Utils;
 import t3.plugin.annotations.Mojo;
 import t3.plugin.annotations.Parameter;
 import t3.tic.bw5.BW5MojoInformation;
 import t3.tic.bw5.Messages;
+import t3.utils.SortedProperties;
+import t3.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;

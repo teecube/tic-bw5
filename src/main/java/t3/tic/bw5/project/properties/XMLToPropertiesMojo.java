@@ -20,13 +20,13 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.xml.sax.SAXException;
-import t3.SortedProperties;
 import t3.plugin.annotations.Mojo;
 import t3.plugin.annotations.Parameter;
 import t3.tic.bw5.BW5MojoInformation;
 import t3.tic.bw5.Messages;
 import t3.tic.bw5.project.properties.appmgmt.ApplicationMarshaller;
 import t3.tic.bw5.project.properties.appmgmt.ApplicationType;
+import t3.utils.SortedProperties;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
