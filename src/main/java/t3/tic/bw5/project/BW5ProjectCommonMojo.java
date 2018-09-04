@@ -178,6 +178,9 @@ public abstract class BW5ProjectCommonMojo extends BW5CommonMojo {
                 public boolean apply(Dependency d) {
                     return BWEAR_TYPE.equals(d.getType());
                 }
+                public boolean test(Dependency d) {
+                    return BWEAR_TYPE.equals(d.getType());
+                }
             }
         );
 
@@ -198,6 +201,9 @@ public abstract class BW5ProjectCommonMojo extends BW5CommonMojo {
                     public boolean apply(Dependency d) {
                         return PROJLIB_TYPE.equals(d.getType());
                     }
+                    public boolean test(Dependency d) {
+                        return PROJLIB_TYPE.equals(d.getType());
+                    }
                 }
             );
 
@@ -216,6 +222,9 @@ public abstract class BW5ProjectCommonMojo extends BW5CommonMojo {
         resolvedDependenciesJAR = getDependencies(
                 new Predicate<Dependency>() {
                     public boolean apply(Dependency d) {
+                        return JAR_TYPE.equals(d.getType());
+                    }
+                    public boolean test(Dependency d) {
                         return JAR_TYPE.equals(d.getType());
                     }
                 }
