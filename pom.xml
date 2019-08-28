@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.teecube.tic</groupId>
 		<artifactId>tic</artifactId>
-		<version>0.0.6-SNAPSHOT</version>
+		<version>0.1.0</version>
 	</parent>
 
 	<artifactId>tic-bw5</artifactId>
@@ -31,7 +31,6 @@
  		<t3.site.globalDocumentation.bootstrapClass>t3.tic.bw5.BW5LifecycleParticipant</t3.site.globalDocumentation.bootstrapClass>
 		<t3.site.globalDocumentation.sampleProfileCommandLineGenerator><![CDATA[<p><em>To generate automatically a sample profile for an environment called <strong>BW5</strong> and <strong>add it automatically to the settings.xml of Maven</strong>, run : </em></p><div class="command" title="Sample profile for Maven settings.xml generator"><span id="command">mvn toe:configure-bw5</span><span class="argument">-Dtibco.installation.environmentName=BW5</span><span class="argument">-Dtibco.configuration.writeToSettings=true</span></div>]]></t3.site.globalDocumentation.sampleProfileCommandLineGenerator>
 	</properties>
-
 	<build>
 		<plugins>
 			<plugin>
